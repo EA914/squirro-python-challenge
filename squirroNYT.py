@@ -53,7 +53,7 @@ class NYTimesSource(object):
 				"q": "Silicon Valley",
 				"page": page,
 				"sort": "newest",
-				"fl": "web_url,headline,snippet,kicker",  # Include kicker field
+				"fl": "web_url,headline,snippet,kicker", 
 			}
 			response = requests.get(self.base_url, params=params)
 			if response.status_code == 200:
@@ -65,10 +65,10 @@ class NYTimesSource(object):
 				page += 1
 			else:
 				if response.status_code == 429:
-					log.warning("Rate limit exceeded. Waiting 12 seconds...")
+					log.warning("Rate limit exceeded / 429 error. Waiting 12 seconds...")
 					time.sleep(12)  #Wait for 12 seconds according to NYT throttling documentation
 				else:
-					log.error("Failed to fetch data. Status code: %d", response.status_code)
+					log.error("Failed to fetch data. Status code: %d", response.status_code) #Generic error code
 					break
 
 	def getSchema(self):
@@ -88,7 +88,7 @@ class NYTimesSource(object):
 
 if __name__ == "__main__":
 	config = {
-		"api_key": "CM93Xx877QHa3ci6lC2bAEZ7xDvs1eLa",	# Replace with your actual NYT API key
+		"api_key": "CM93Xx877QHa3ci6lC2bAEZ7xDvs1eLa", #API key
 	}
 	source = NYTimesSource(config["api_key"])
 
